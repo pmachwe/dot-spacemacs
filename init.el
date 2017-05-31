@@ -145,7 +145,7 @@ values."
    ;; True if the home buffer should respond to resize events.
    dotspacemacs-startup-buffer-responsive t
    ;; Default major mode of the scratch buffer (default `text-mode')
-   dotspacemacs-scratch-mode 'text-mode
+   dotspacemacs-scratch-mode 'emacs-lisp-mode
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
@@ -250,7 +250,7 @@ values."
    ;; If non nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup nil
+   dotspacemacs-maximized-at-startup t
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
@@ -297,7 +297,7 @@ values."
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
    ;; emphasis the current one). (default 'all)
    dotspacemacs-highlight-delimiters 'all
-   ;; If non nil, advise quit functions to keep server open when quitting.
+   ;; If non nil, advise quit function to keep server open when quitting.
    ;; (default nil)
    dotspacemacs-persistent-server nil
    ;; List of search tool executable names. Spacemacs uses the first installed
@@ -332,6 +332,70 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+
+  ;; Enable some modes by default
+  (which-function-mode 1)
+  (winner-mode 1)
+
+  (if window-system
+      (global-hl-line-mode 1))
+
+  ;; no bells please
+  (defun my-bell-func()) ;; empty
+  (setq ring-bell-function 'my-bell-func)
+  (setq visible-bell nil)
+
+  ;; http://endlessparentheses.com/faster-pop-to-mark-command.html
+  ;; Go up last positions using C-u C-SPC C-SPC
+  ;; instead of C-u C-SPC C-u C-SPC
+  (setq set-mark-command-repeat-pop t)
+
+  ;; If same marks are saved in the ring, pop out the same ones
+  (defun my/multi-pop-to-mark (orig-fun &rest args)
+    "Call ORIG-FUN until the cursor moves.
+Try the repeated popping up to 10 times."
+    (let ((p (point)))
+      (dotimes (i 10)
+        (when (= p (point))
+          (apply orig-fun args)))))
+  
+  ;; Theme configuration
+  (use-package afternoon-theme
+    :config
+    (load-theme 'afternoon t)
+    (set-face-attribute 'mode-line nil
+                        :family 'unspecified)
+    (set-face-attribute `mode-line nil
+                        :box nil)
+    (set-face-attribute `mode-line-inactive nil
+                        :box nil))
+
+  ;; Always use same color for selected region
+  ;; otherwise global-hl-line-mode interferes
+  (set-face-attribute 'region nil :foreground "black" :background "#a2bff4")
+
+  ;; Make sure line numbers always look the same
+  ;(if window-system
+  ;    (set-face-attribute 'linum-highlight-face nil :background nil :foreground "white"))
+
+  ;; Some themes have bad face for this, fix it
+  (set-face-attribute 'which-func nil :foreground "SkyBlue1")
+
+  ;; Personal key-bindings
+  ;; Buffer related
+  (bind-keys*
+   ("M-j" . counsel-find-file)
+   ("M-J" . ido-find-file-other-window)
+   ("M-o" . ivy-switch-buffer)
+   ("M-k" . kill-buffer-and-window)
+   ("M-K" . kill-buffer))
+
+  ;; Avy - again due to org-mode pollution
+  (bind-keys*
+   ("C-;" . avy-goto-word-1)
+   ("C-c ;" . avy-goto-char)
+   ("M-g g" . avy-goto-line))
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
