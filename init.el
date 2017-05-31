@@ -49,6 +49,19 @@ values."
      spell-checking
      syntax-checking
      ;; version-control
+     ;; Added packages
+     smex
+     nlinum
+     perforce
+     gtags
+     imenu-list
+     shell
+     ;; Programming Languages
+     c-c++
+     emacs-lisp
+     latex
+     python
+     shell-scripts
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
