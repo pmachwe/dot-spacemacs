@@ -41,7 +41,7 @@ values."
      better-defaults
      emacs-lisp
      git
-     ;; markdown
+     ;counsel-gtags; markdown
      org
      (shell :variables
             shell-default-height 30
@@ -380,6 +380,48 @@ Try the repeated popping up to 10 times."
 
   ;; Some themes have bad face for this, fix it
   (set-face-attribute 'which-func nil :foreground "SkyBlue1")
+
+  ;; common settings for all programming languages
+
+(defun my/common-prog-hooks()
+  (if window-system (linum-mode 1))
+  (local-set-key (kbd "RET") 'newline-and-indent)
+  (subword-mode 1)
+  (yas-minor-mode +1))
+
+;; No tabs
+(setq-default indent-tabs-mode nil)
+
+;; Allow folding of code blocks
+(add-hook 'c-mode-common-hook   'hs-minor-mode)
+
+;; add to all
+(add-hook 'prog-mode-hook 'my/common-prog-hooks)
+
+;; for compilation
+(setq compilation-scroll-output t)
+
+;; c/c++
+
+(setq-default c-default-style "stroustrup"
+              c-basic-offset 4)
+
+;; Open .h file in cpp mode
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
+(defun my/cpp-hooks()
+;  (ggtags-mode 1)
+  (counsel-gtags-mode 1)
+  (add-hook 'c++-mode-hook (lambda ()
+                             (setq flycheck-gcc-language-standard "c++11")
+                             (setq flycheck-clang-language-standard "c++11")))
+  (my/common-prog-hooks))
+
+;(add-hook 'c++-mode-hook 'my/cpp-hooks)
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+              (my/cpp-hooks))))
 
   ;; Personal key-bindings
   ;; Buffer related
