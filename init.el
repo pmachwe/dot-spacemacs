@@ -73,6 +73,10 @@ values."
                                       expand-region
                                       multiple-cursors
                                       dtrt-indent
+                                      ;; themes
+                                      afternoon-theme
+                                      emacs-leuven
+                                      color-theme-sanityinc-tomorrow
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -145,8 +149,8 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
-                         spacemacs-light)
+   dotspacemacs-themes '(afternoon
+                         leuven)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -337,12 +341,36 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(evil-want-Y-yank-to-eol nil)
+ '(fci-rule-color "#14151E" t)
  '(package-selected-packages
    (quote
-    (multiple-cursors dtrt-indent yapfify pyvenv pytest pyenv-mode py-isort pip-requirements p4 nlinum-relative nlinum live-py-mode insert-shebang imenu-list hy-mode ggtags fish-mode disaster cython-mode company-shell company-c-headers company-auctex company-anaconda cmake-mode clang-format auctex anaconda-mode pythonic xterm-color unfill smeargle shell-pop orgit org-projectile org-present org-pomodoro alert log4e gntp org-download mwim multi-term magit-gitflow htmlize gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link fuzzy flyspell-correct-ivy flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit with-editor eshell-z eshell-prompt-extras esh-help company-statistics company auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete spinner helm-make adaptive-wrap ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm helm-core google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump popup f s diminish define-word counsel-projectile projectile pkg-info epl counsel swiper ivy column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash async aggressive-indent ace-window ace-link avy))))
+    (color-theme-sanityinc-tomorrow afternoon-theme multiple-cursors dtrt-indent yapfify pyvenv pytest pyenv-mode py-isort pip-requirements p4 nlinum-relative nlinum live-py-mode insert-shebang imenu-list hy-mode ggtags fish-mode disaster cython-mode company-shell company-c-headers company-auctex company-anaconda cmake-mode clang-format auctex anaconda-mode pythonic xterm-color unfill smeargle shell-pop orgit org-projectile org-present org-pomodoro alert log4e gntp org-download mwim multi-term magit-gitflow htmlize gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link fuzzy flyspell-correct-ivy flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit with-editor eshell-z eshell-prompt-extras esh-help company-statistics company auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete spinner helm-make adaptive-wrap ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm helm-core google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump popup f s diminish define-word counsel-projectile projectile pkg-info epl counsel swiper ivy column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash async aggressive-indent ace-window ace-link avy)))
+ '(vc-annotate-background nil)
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#d54e53")
+     (40 . "goldenrod")
+     (60 . "#e7c547")
+     (80 . "DarkOliveGreen3")
+     (100 . "#70c0b1")
+     (120 . "DeepSkyBlue1")
+     (140 . "#c397d8")
+     (160 . "#d54e53")
+     (180 . "goldenrod")
+     (200 . "#e7c547")
+     (220 . "DarkOliveGreen3")
+     (240 . "#70c0b1")
+     (260 . "DeepSkyBlue1")
+     (280 . "#c397d8")
+     (300 . "#d54e53")
+     (320 . "goldenrod")
+     (340 . "#e7c547")
+     (360 . "DarkOliveGreen3"))))
+ '(vc-annotate-very-old-color nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:family "Source Code Pro" :foundry "nil" :slant normal :weight normal :height 140 :width normal)))))
